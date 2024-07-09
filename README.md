@@ -35,3 +35,11 @@ En dicho Design System podréis encontrar un índice nada más abrirlo con todos
 
 El siguiente paso que he seguido ha sido crear el repositorio en Github a través de la aplicación de escritorio de Github, instalar React a través del compilador de Vite e incorporar el archivo "vercel.json" para añadir la regla de reescritura de las url para que funcionen correctamente en Vercel.
 Una vez cumplidos estos pasos, he procedido a publicar el repositorio en Github.
+
+<h3>3. Inicializado de Git Flow para crear ramas de dev y feature.</h3>
+
+Para trabajar en el repositorio he utilizado Git Flow y he ido creando ramas de features que, una vez finalizadas, he mergeado en develop para hacer realease cuando consideraba oportuno.
+
+<h3>4. Creación de assets.</h3>
+
+En primer lugar me gusta preparar el entorno de desarrollo con los assets que voy a necesitar, sean .svgs, imágenes, etc. Por ello he creado el fichero icons.tsx donde he metido todos los svgs que voy a utilizar y que están representados en el Design System.
