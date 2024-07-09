@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/jocofe/Pokedex-Onestic">
-    <img src="/public/Pokeball icon.svg" alt="Logo">
+    <img style="width: 32px; height: 32px;"src="/public/Pokeball icon.svg" alt="Logo">
   </a>
 
   <h3 align="center">Pokédex Sinnoh</h3>
