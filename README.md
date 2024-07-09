@@ -23,7 +23,7 @@
 
 ## Memoria del proyecto
 
-1. Design System
+<h3>1. Design System</h3>
 
 Para comenzar el proyecto he planteado el diseño elaborando un Design System breve en Figma:
 
@@ -31,7 +31,7 @@ Para comenzar el proyecto he planteado el diseño elaborando un Design System br
 
 En dicho Design System podréis encontrar un índice nada más abrirlo con todos los apartados que lo componen (color, tipografía, componentes, layouts, etc.). Mi decisión de hacer este pequeño Design System previamente al desarrollo se debe a que me ayuda a plantear tanto la interfaz como las funcionalidades de una forma visual.
 
-2. Creación repositorio, instalación React con Vite y deploy en Vercel.
+<h3>2. Creación repositorio, instalación React con Vite y deploy en Vercel.</h3>
 
 El siguiente paso que he seguido ha sido crear el repositorio en Github a través de la aplicación de escritorio de Github, instalar React a través del compilador de Vite e incorporar el archivo "vercel.json" para añadir la regla de reescritura de las url para que funcionen correctamente en Vercel.
 Una vez cumplidos estos pasos, he procedido a publicar el repositorio en Github.
