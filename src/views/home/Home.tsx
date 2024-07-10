@@ -1,3 +1,5 @@
+import { PokemonGridList } from '../../components/pokemon-grid-list/PokemonGridList';
+
 export const Home = () => {
-	return <div>Home</div>;
+	return <PokemonGridList />;
 };
