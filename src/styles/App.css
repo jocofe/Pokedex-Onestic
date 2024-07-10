@@ -1,0 +1,71 @@
+.background-color--electric {
+	background-color: var(--color-electric);
+}
+
+.background-color--fire {
+	background-color: var(--color-fire);
+}
+
+.background-color--water {
+	background-color: var(--color-water);
+}
+
+.background-color--grass {
+	background-color: var(--color-grass);
+}
+
+.background-color--flying {
+	background-color: var(--color-flying);
+}
+
+.background-color--poison {
+	background-color: var(--color-poison);
+}
+
+.background-color--steel {
+	background-color: var(--color-steel);
+}
+
+.background-color--bug {
+	background-color: var(--color-bug);
+}
+
+.background-color--fighting {
+	background-color: var(--color-fighting);
+}
+
+.background-color--ground {
+	background-color: var(--color-ground);
+}
+
+.background-color--rock {
+	background-color: var(--color-rock);
+}
+
+.background-color--dark {
+	background-color: var(--color-dark);
+}
+
+.background-color--ghost {
+	background-color: var(--color-ghost);
+}
+
+.background-color--dragon {
+	background-color: var(--color-dragon);
+}
+
+.background-color--fairy {
+	background-color: var(--color-fairy);
+}
+
+.background-color--psychic {
+	background-color: var(--color-psychic);
+}
+
+.background-color--ice {
+	background-color: var(--color-ice);
+}
+
+.background-color--normal {
+	background-color: var(--color-normal);
+}

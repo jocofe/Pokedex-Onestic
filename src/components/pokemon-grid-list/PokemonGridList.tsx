@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useFetchPokemonSinnoh } from '../../hooks/useFetchPokemonSinnoh';
 import { PokemonCard } from '../pokemon-card/PokemonCard';
 import { PokemonItem } from '../../models/pokemon-list';
+import '../pokemon-grid-list/pokemongridlist.css';
 
 export const PokemonGridList = () => {
 	const [page, setPage] = useState(1);
@@ -11,7 +12,7 @@ export const PokemonGridList = () => {
 	const handlePrevPage = () => setPage((prevPage) => Math.max(prevPage - 1, 1));
 
 	return (
-		<div>
+		<div className='pokemon-grid-wrapper'>
 			<div className='pokemon-grid'>
 				{isLoading && <p>Loading...</p>}
 				{error && <p>{error}</p>}
