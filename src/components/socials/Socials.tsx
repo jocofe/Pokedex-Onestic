@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Heart, FullHeart, CopyLink } from '../icons/icons';
 import { SocialsProps } from '../../models/socials';
 import { Toaster } from '../toaster/Toaster';
+import '../socials/socials.css';
 
 export const Socials = (props: SocialsProps) => {
 	const { pokemonId } = props;

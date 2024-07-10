@@ -14,3 +14,8 @@
 	gap: 24px;
 	align-self: stretch;
 }
+
+.pokemon-card__image {
+	width: 150px;
+	height: auto;
+}
