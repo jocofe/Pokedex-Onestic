@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+	/*------------------------------------*\
+        $FAMILY
+    \*------------------------------------*/
+
+	--sans-serif: 'Hanken Grotesk', Helvetica, Verdana, sans-serif;
+
+	/*------------------------------------*\
+        $WEIGHT
+    \*------------------------------------*/
+
+	--font-weight-light: 300;
+	--font-weight-normal: 400;
+	--font-weight-medium: 500;
+	--font-weight-semibold: 600;
+	--font-weight-bold: 700;
+
+	/*------------------------------------*\
+        $SIZE
+    \*------------------------------------*/
+
+	--font-size-12: 1.2rem;
+	--font-size-14: 1.4rem;
+	--font-size-16: 1.6rem;
+	--font-size-20: 2rem;
+	--font-size-24: 2.4rem;
+	--font-size-28: 2.8rem;
+	--font-size-36: 3.6rem;
+	--font-size-48: 4.8rem;
+	--font-size-62: 6.2rem;
+	--font-size-72: 7.2rem;
+
+	/*------------------------------------*\
+        $COLOR-VAR
+    \*------------------------------------*/
+
+	--color-white: hsl(0, 0%, 100%);
+	--color-white-dark: hsla(0, 0%, 75%, 1);
+	--color-white-darker: hsla(0, 0%, 50%, 1);
+
+	--color-blackball-lighter: hsl(0, 0%, 98%, 1);
+	--color-blackball-light: hsl(0, 0%, 50%);
+	--color-blackball: hsl(0, 0%, 9%);
+
+	--color-redball: hsla(0, 100%, 64%, 1);
+	--color-redball-dark: hsla(0, 82%, 57%, 1);
+	--color-redball-darker: hsla(0, 63%, 51%, 1);
+
+	--color-grass: hsla(120, 77%, 74%, 1);
+	--color-fire: hsla(0, 90%, 71%, 1);
+	--color-flying: hsla(194, 100%, 79%, 1);
+	--color-poison: hsla(313, 100%, 84%, 1);
+	--color-water: hsla(227, 100%, 80%, 1);
+	--color-steel: hsla(202, 65%, 80%, 1);
+	--color-bug: hsla(68, 52%, 71%, 1);
+	--color-electric: hsla(54, 100%, 70%, 1);
+	--color-fighting: hsla(36, 100%, 70%, 1);
+	--color-ground: hsla(36, 46%, 55%, 1);
+	--color-rock: hsla(36, 63%, 54%, 1);
+	--color-dark: hsla(0, 0%, 22%, 1);
+	--color-ghost: hsla(295, 25%, 41%, 1);
+	--color-dragon: hsla(248, 63%, 61%, 1);
+	--color-fairy: hsla(331, 100%, 76%, 1);
+	--color-psychic: hsla(346, 76%, 66%, 1);
+	--color-ice: hsla(180, 69%, 68%, 1);
+	--color-normal: hsla(0, 0%, 81%, 1);
+}
