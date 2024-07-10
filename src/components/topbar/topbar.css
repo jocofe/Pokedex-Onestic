@@ -1,0 +1,28 @@
+.topbar {
+	width: auto;
+	height: 100px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	align-content: center;
+	padding: 0px 128px 0px 128px;
+	flex-direction: row;
+	gap: 128px;
+}
+
+.topbar__logo {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	gap: 12px;
+}
+
+.switch-icon {
+	width: 32px;
+	height: 32px;
+}
+
+.logotype {
+	width: 32px;
+	height: 32px;
+}

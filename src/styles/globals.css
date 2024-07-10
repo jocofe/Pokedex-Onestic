@@ -44,6 +44,8 @@
 	--color-blackball-light: hsl(0, 0%, 50%);
 	--color-blackball: hsl(0, 0%, 9%);
 
+	--color-lightball: hsla(0, 0%, 91%, 1);
+
 	--color-redball: hsla(0, 100%, 64%, 1);
 	--color-redball-dark: hsla(0, 82%, 57%, 1);
 	--color-redball-darker: hsla(0, 63%, 51%, 1);

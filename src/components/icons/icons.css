@@ -1,0 +1,15 @@
+.icon {
+	color: var(--color-blackball);
+	width: 24px;
+	height: 24px;
+	display: flex;
+}
+
+.icon--absolute {
+	position: absolute;
+	color: var(--color-redball);
+	top: 32%;
+	right: 24px;
+	width: 16px;
+	height: 16px;
+}
