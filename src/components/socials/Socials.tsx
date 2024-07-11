@@ -1,17 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Heart, FullHeart, CopyLink } from '../icons/icons';
 import { SocialsProps } from '../../models/socials';
 import { Toaster } from '../toaster/Toaster';
 import '../socials/socials.css';
 
 export const Socials = (props: SocialsProps) => {
-	const { pokemonId } = props;
-	const [isFav, setIsFav] = useState(false);
+	const { pokemonName, isFavorite: propIsFavorite, onFavoriteToggle } = props;
+	const [isFavorite, setIsFavorite] = useState(propIsFavorite);
 	const [isLinkCopied, setIsLinkCopied] = useState(false);
 
-	const handleFav = async (event: React.MouseEvent<HTMLElement>) => {
-		event?.preventDefault();
-		setIsFav(true);
+	useEffect(() => {
+		setIsFavorite(propIsFavorite);
+	}, [propIsFavorite]);
+
+	const handleFav = (event: React.MouseEvent<HTMLElement>) => {
+		event.preventDefault();
+		onFavoriteToggle();
+		setIsFavorite((prevIsFavorite) => !prevIsFavorite);
 	};
 
 	const copyArtworkLink = () => {
@@ -20,7 +25,7 @@ export const Socials = (props: SocialsProps) => {
 			return;
 		}
 		const baseUrl = window.location.origin;
-		const copiedUrl = `${baseUrl}/${pokemonId}`;
+		const copiedUrl = `${baseUrl}/${pokemonName}`;
 		navigator.clipboard
 			.writeText(copiedUrl)
 			.then(() => {
@@ -41,7 +46,11 @@ export const Socials = (props: SocialsProps) => {
 					<CopyLink className='icon' />
 				</div>
 				<div onClick={handleFav} className='icon-wrapper button-icon'>
-					{isFav ? <FullHeart className='icon' /> : <Heart className='icon' />}
+					{isFavorite ? (
+						<FullHeart className='icon' />
+					) : (
+						<Heart className='icon' />
+					)}
 				</div>
 			</div>
 			{isLinkCopied && (

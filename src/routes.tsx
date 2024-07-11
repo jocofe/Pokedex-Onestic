@@ -17,7 +17,7 @@ export const router = createBrowserRouter([
 				element: <PokemonPage />,
 			},
 			{
-				path: '/favourites',
+				path: '/favorites',
 				element: <Favourites />,
 			},
 		],

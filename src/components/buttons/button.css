@@ -1,0 +1,83 @@
+.btn {
+	box-sizing: border-box;
+	width: max-content;
+	border-radius: 20px;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.btn:disabled {
+	background-color: var(--color-white);
+	border: 2px solid var(--color-lightball);
+	color: var(--color-lightball);
+	cursor: not-allowed;
+}
+
+.btn--small {
+	min-height: 36px;
+	padding: 0px 16px;
+}
+
+.btn--default {
+	min-height: 48px;
+	padding: 0px 24px;
+}
+
+/*------------------------------------*\
+    $BUTTON--TYPES
+\*------------------------------------*/
+
+.btn--primary {
+	background-color: var(--color-redball);
+	color: var(--color-white);
+}
+
+.btn--primary:hover {
+	background-color: var(--color-redball-dark);
+}
+
+.btn--primary:active {
+	background-color: var(--color-redball-darker);
+}
+
+.btn--primary:focus-visible {
+	border: 1px solid var(--color-lightball);
+}
+.btn--subprimary {
+	background-color: var(--color-blackball);
+	color: var(--color-white);
+}
+
+.btn--subprimary:hover {
+	background-color: var(--color-white);
+	border: 1px solid var(--color-blackball);
+	color: var(--color-blackball);
+}
+
+.btn--subprimary:active {
+	background-color: var(--color-redball);
+}
+
+.btn--subprimary:focus-visible {
+	border: 1px solid var(--color-redball);
+}
+.btn--secondary {
+	background-color: var(--color-white);
+	color: var(--color-blackball);
+	border: 1px solid var(--color-blackball);
+}
+
+.btn--secondary:hover {
+	background-color: var(--color-redball);
+	color: var(--color-white);
+}
+
+.btn--secondary:active {
+	background-color: var(--color-redball-dark);
+	color: var(--color-white);
+}
+
+.btn--secondary:focus-visible {
+	border: 1px solid var(--color-redball);
+}
