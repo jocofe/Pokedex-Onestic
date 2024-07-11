@@ -8,34 +8,43 @@ import {
 } from '../../components/icons/icons';
 import { PokemonCard } from '../../components/pokemon-card/PokemonCard';
 import { useNavigate } from 'react-router-dom';
-import { PokemonCardProps } from '../../models/pokemoncarddetails';
+import { useFetchPokemonSinnoh } from '../../hooks/useFetchPokemonSinnoh';
+import '../../components/pokemon-grid-list/pokemongridlist.css';
+import { PokemonViewItem } from '../../models/pokemon-view-item';
 
 export const Favourites = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [isListView, setIsListView] = useState(false);
 	const [listButtonText, setListButtonText] = useState('List');
-	const [favorites, setFavorites] = useState<PokemonCardProps[]>([]);
-	const [isLoading, setIsLoading] = useState(true);
-	const [error] = useState('');
+	const [favorites, setFavorites] = useState<string[]>([]);
+	const [error, setError] = useState('');
+	const { pokemonList, isLoading } = useFetchPokemonSinnoh();
 	const navigate = useNavigate();
 
 	const pokemonPerPage = 12;
 
 	useEffect(() => {
-		const storedFavorites = JSON.parse(
-			localStorage.getItem('favorites') || '[]'
-		);
-		setFavorites(storedFavorites);
-		setIsLoading(false);
+		try {
+			const storedFavorites = JSON.parse(
+				localStorage.getItem('favorites') || '[]'
+			);
+			setFavorites(storedFavorites);
+		} catch (err) {
+			setError('Failed to load favorites.');
+		}
 	}, []);
 
-	const totalPokemon = favorites.length;
+	const favoritePokemon = pokemonList.filter((pokemon) =>
+		favorites.includes(pokemon.pokemonId)
+	);
+
+	const totalPokemon = favoritePokemon.length;
 	const totalPages = Math.ceil(totalPokemon / pokemonPerPage);
 
 	const startIndex = (currentPage - 1) * pokemonPerPage;
 	const endIndex = startIndex + pokemonPerPage;
 
-	const visiblePokemon = favorites.slice(startIndex, endIndex);
+	const visiblePokemon = favoritePokemon.slice(startIndex, endIndex);
 
 	const handleNextPage = () => {
 		if (currentPage < totalPages) {
@@ -81,16 +90,15 @@ export const Favourites = () => {
 				{error && <p>{error}</p>}
 				{!isLoading &&
 					!error &&
-					visiblePokemon.map((pokemon: PokemonCardProps) => (
+					visiblePokemon.map((pokemon: PokemonViewItem) => (
 						<PokemonCard
-							key={pokemon.id}
-							pokemonId={pokemon.id}
-							pokemonName={pokemon.name}
-							pokemonType={pokemon.types.map(
-								(typeInfo: any) => typeInfo.type.name
-							)}
+							key={pokemon.pokemonId}
+							pokemonId={pokemon.pokemonId}
+							pokemonName={pokemon.pokemonName}
+							pokemonType={pokemon.pokemonType}
 							isListView={isListView}
 							favorites={favorites}
+							isFavorite={false}
 						/>
 					))}
 			</div>

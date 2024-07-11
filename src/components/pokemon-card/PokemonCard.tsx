@@ -6,25 +6,19 @@ import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 
-export const PokemonCard = (
-	props: PokemonCardProps & { isListView: boolean }
-) => {
-	const { pokemonId, pokemonName, pokemonType, isListView } = props;
+export const PokemonCard = (props: PokemonCardProps) => {
+	const { pokemonId, pokemonName, pokemonType, isListView, favorites } = props;
 	const imageUrl = useImageUrl(pokemonId);
 	const capitalizedPokemonName = capitalizeFirstLetter(pokemonName);
 	const [isFavorite, setIsFavorite] = useState(false);
 
 	useEffect(() => {
-		const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-		setIsFavorite(favorites.includes(pokemonId.toString()));
-	}, [pokemonId]);
+		setIsFavorite(favorites.includes(pokemonId));
+	}, [pokemonId, favorites]);
 
 	let firstType = '';
-	if (Array.isArray(pokemonType) && pokemonType.length > 0) {
+	if (pokemonType.length > 0) {
 		firstType = capitalizeFirstLetter(pokemonType[0].type.name);
-	} else if (typeof pokemonType === 'string') {
-		const types = pokemonType.split(',').map((type: string) => type.trim());
-		firstType = capitalizeFirstLetter(types[0]);
 	}
 
 	const cardClass = classNames('pokemon-card', {
@@ -39,20 +33,13 @@ export const PokemonCard = (
 	});
 
 	const handleFavoriteToggle = () => {
-		const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
-		if (isFavorite) {
-			const updatedFavorites = favorites.filter(
-				(fav: string) => fav !== pokemonId.toString()
-			);
-			localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-		} else {
-			localStorage.setItem(
-				'favorites',
-				JSON.stringify([...favorites, pokemonId.toString()])
-			);
-		}
-		setIsFavorite((prevIsFavorite) => !prevIsFavorite);
-		console.log(localStorage);
+		const isAlreadyFavorite = favorites.includes(pokemonId);
+		const updatedFavorites = isAlreadyFavorite
+			? favorites.filter((fav) => fav !== pokemonId)
+			: [...favorites, pokemonId];
+		localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
+		setIsFavorite(!isAlreadyFavorite);
+		console.log('Updated favorites:', updatedFavorites);
 	};
 
 	if (isListView) {
@@ -70,6 +57,7 @@ export const PokemonCard = (
 					<h2 className='pokemon__name'>{capitalizedPokemonName}</h2>
 					<p className='pokemon__type'>{firstType}</p>
 					<Socials
+						pokemonId={pokemonId}
 						pokemonName={pokemonName}
 						isFavorite={isFavorite}
 						onFavoriteToggle={handleFavoriteToggle}
@@ -90,6 +78,7 @@ export const PokemonCard = (
 				<img src={imageUrl} alt={pokemonName} className='pokemon-card__image' />
 			</div>
 			<Socials
+				pokemonId={pokemonId}
 				pokemonName={pokemonName}
 				isFavorite={isFavorite}
 				onFavoriteToggle={handleFavoriteToggle}

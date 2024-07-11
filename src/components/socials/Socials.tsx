@@ -13,12 +13,6 @@ export const Socials = (props: SocialsProps) => {
 		setIsFavorite(propIsFavorite);
 	}, [propIsFavorite]);
 
-	const handleFav = (event: React.MouseEvent<HTMLElement>) => {
-		event.preventDefault();
-		onFavoriteToggle();
-		setIsFavorite((prevIsFavorite) => !prevIsFavorite);
-	};
-
 	const copyArtworkLink = () => {
 		if (!navigator.clipboard) {
 			console.error('Clipboard API not supported');
@@ -45,7 +39,7 @@ export const Socials = (props: SocialsProps) => {
 				<div onClick={copyArtworkLink} className='icon-wrapper'>
 					<CopyLink className='icon' />
 				</div>
-				<div onClick={handleFav} className='icon-wrapper button-icon'>
+				<div onClick={onFavoriteToggle} className='icon-wrapper button-icon'>
 					{isFavorite ? (
 						<FullHeart className='icon' />
 					) : (

@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { PokemonItem } from '../models/pokemon-list';
+import { PokemonViewItem } from '../models/pokemon-view-item';
+import { mapPokemonApiToPokemonView } from '../utils/mapPokemonApiToPokemonView';
 
 export const useFetchPokemonSinnoh = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
-	const [pokemonList, setPokemonList] = useState<PokemonItem[]>([]);
+	const [pokemonList, setPokemonList] = useState<PokemonViewItem[]>([]);
 
 	useEffect(() => {
 		const fetchPokemon = async () => {
@@ -21,12 +23,16 @@ export const useFetchPokemonSinnoh = () => {
 						const response = await axios.get<PokemonItem>(
 							`https://pokeapi.co/api/v2/pokemon/${id}`
 						);
-						console.log(response);
 						return response.data;
 					})
 				);
 
-				setPokemonList(pokemonDetails);
+				const mappedPokemonList = pokemonDetails.map(
+					mapPokemonApiToPokemonView
+				);
+
+				setPokemonList(mappedPokemonList);
+				console.log(mappedPokemonList);
 			} catch (err) {
 				setError('Failed to fetch pokemon data');
 			} finally {

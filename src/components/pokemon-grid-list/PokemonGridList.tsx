@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { useFetchPokemonSinnoh } from '../../hooks/useFetchPokemonSinnoh';
 import { PokemonCard } from '../pokemon-card/PokemonCard';
-import { PokemonItem } from '../../models/pokemon-list';
+import { PokemonViewItem } from '../../models/pokemon-view-item';
 import '../pokemon-grid-list/pokemongridlist.css';
 import { Button } from '../buttons/Button';
 import { ListIcon, GridIcon, ArrowLeft, ArrowRight } from '../icons/icons';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { PokemonCardProps } from '../../models/pokemoncarddetails';
 
-export const PokemonGridList = () => {
+export const PokemonGridList = (props: PokemonCardProps) => {
+	const { pokemonName } = props;
 	const [currentPage, setCurrentPage] = useState(1);
 	const [isListView, setIsListView] = useState(false);
 	const [listButtonText, setListButtonText] = useState('List');
@@ -21,13 +23,10 @@ export const PokemonGridList = () => {
 	const navigate = useNavigate();
 
 	const pokemonPerPage = 12;
-
 	const totalPokemon = pokemonList.length;
 	const totalPages = Math.ceil(totalPokemon / pokemonPerPage);
-
 	const startIndex = (currentPage - 1) * pokemonPerPage;
 	const endIndex = startIndex + pokemonPerPage;
-
 	const visiblePokemon = pokemonList.slice(startIndex, endIndex);
 
 	const handleNextPage = () => {
@@ -74,17 +73,19 @@ export const PokemonGridList = () => {
 				{error && <p>{error}</p>}
 				{!isLoading &&
 					!error &&
-					visiblePokemon.map((pokemon: PokemonItem) => (
-						<PokemonCard
-							key={pokemon.id}
-							pokemonId={pokemon.id.toString()}
-							pokemonName={pokemon.name}
-							pokemonType={pokemon.types
-								.map((typeInfo) => typeInfo.type.name)
-								.join(', ')}
-							isListView={isListView}
-							favorites={favorites}
-						/>
+					visiblePokemon.map((pokemon: PokemonViewItem) => (
+						<div className='relative'>
+							<PokemonCard
+								key={pokemon.pokemonId}
+								pokemonId={pokemon.pokemonId}
+								pokemonName={pokemon.pokemonName}
+								pokemonType={pokemon.pokemonType}
+								isListView={isListView}
+								favorites={favorites}
+								isFavorite={false}
+							/>
+							<Link className='expanded-anchor' to={`/${pokemonName}`} />
+						</div>
 					))}
 			</div>
 			<div className='pokemon-grid__controls'>
