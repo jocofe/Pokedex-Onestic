@@ -146,6 +146,11 @@
 		font-size: var(--font-size-18);
 		width: 40%;
 	}
+
+	.pokemon-img {
+		width: 350px;
+		margin-top: -500px;
+	}
 }
 
 @media (max-width: 1150px) {
