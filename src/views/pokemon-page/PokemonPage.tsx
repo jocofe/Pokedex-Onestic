@@ -4,6 +4,8 @@ import { Loading } from '../../components/icons/icons';
 import { Button } from '../../components/buttons/Button';
 import '../pokemon-page/pokemonpage.css';
 import { getPokemonTypeColor } from '../../utils/getPokemonTypeColor';
+import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
+import { NavLink } from 'react-router-dom';
 
 export const PokemonPage = () => {
 	const { pokemonInfo } = useGetPokemonPageInfo();
@@ -25,18 +27,25 @@ export const PokemonPage = () => {
 		return <h3>No information found for this Pokémon!</h3>;
 	}
 
+	const capitalizedPokemonName = capitalizeFirstLetter(pokemonInfo.name);
+	const capitalizedTypes = pokemonInfo.types.map((type) =>
+		capitalizeFirstLetter(type.type.name)
+	);
 	const headerStyle = {
 		backgroundColor: getPokemonTypeColor(pokemonInfo.types),
 	};
+	const maxStatValue = 252;
 
 	return (
 		<>
 			<div className='pokemon-section'>
 				<div className='pokemon-header' style={headerStyle}>
 					<div className='pokemon__title'>
-						<h1 className='h3'>{pokemonInfo.name}</h1>
+						<h1 className='h3'>{capitalizedPokemonName}</h1>
 						<h2 className='h1'>{pokemonInfo.id}</h2>
 					</div>
+				</div>
+				<div className='img-wrapper'>
 					<img
 						src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonInfo.id}.png`}
 						alt={pokemonInfo.name}
@@ -45,15 +54,22 @@ export const PokemonPage = () => {
 				</div>
 				<div className='pokemon-info'>
 					<div className='pokemon__types'>
-						{pokemonInfo.types.map((type, index) => (
-							<span key={index} className={`type type--${type.type.name}`}>
-								{type.type.name}
+						{capitalizedTypes.map((type, index) => (
+							<span
+								key={index}
+								className={`type type--${pokemonInfo.types[index].type.name}`}>
+								{type}
 							</span>
 						))}
 					</div>
 					<div className='pokemon__characteristics'>
-						<div className='pokemon__height'>Height: {pokemonInfo.height}</div>
-						<div className='pokemon__weight'>Weight: {pokemonInfo.weight}</div>
+						<div className='pokemon__height'>
+							<h4>Height</h4> {pokemonInfo.height}
+						</div>
+						<div className='separator'></div>
+						<div className='pokemon__weight'>
+							<h4>Weight</h4> {pokemonInfo.weight}
+						</div>
 					</div>
 				</div>
 				<div className='pokemon-stats'>
@@ -61,11 +77,13 @@ export const PokemonPage = () => {
 					<div className='stats-wrapper'>
 						{pokemonInfo.stats.map((stat) => (
 							<div className='pokemon__stat' key={stat.stat.name}>
-								<h4>{stat.stat.name}</h4>
+								<h4 className='pokemon-stat__name'>{stat.stat.name}</h4>
 								<div className='stat-bar'>
 									<div
 										className='stat-bar__fill'
-										style={{ width: `${stat.base_stat}%` }}>
+										style={{
+											width: `${(stat.base_stat / maxStatValue) * 100}%`,
+										}}>
 										{stat.base_stat}
 									</div>
 								</div>
@@ -74,7 +92,9 @@ export const PokemonPage = () => {
 					</div>
 				</div>
 				<div className='btn-back'>
-					<Button>Back to Pokédex</Button>
+					<Button component={NavLink} to='/'>
+						Back to Pokédex
+					</Button>
 				</div>
 			</div>
 		</>
