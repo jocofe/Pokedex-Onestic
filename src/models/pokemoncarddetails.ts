@@ -7,4 +7,5 @@ export interface PokemonCardProps {
 	isListView: boolean;
 	isFavorite: boolean;
 	favorites: string[];
+	toggleFavorite: () => void;
 }

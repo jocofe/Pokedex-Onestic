@@ -45,6 +45,19 @@
 	align-items: center;
 }
 
+.pokemon-evolutions-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+	align-items: center;
+}
+
+.pokemon__evolutions {
+	display: flex;
+	gap: 32px;
+	width: 100%;
+}
+
 .pokemon__types {
 	margin-top: 200px;
 	display: flex;
@@ -132,5 +145,11 @@
 	.pokemon-stat__name {
 		font-size: var(--font-size-18);
 		width: 40%;
+	}
+}
+
+@media (max-width: 1150px) {
+	.pokemon__evolutions {
+		flex-direction: column;
 	}
 }

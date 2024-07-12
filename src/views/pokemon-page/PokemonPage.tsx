@@ -1,17 +1,22 @@
 import { useContext, useEffect, useState } from 'react';
 import { useGetPokemonPageInfo } from '../../hooks/useGetPokemonPageInfo';
+import { useGetEvolutions } from '../../hooks/useGetEvolutions';
 import { Loading } from '../../components/icons/icons';
 import { Button } from '../../components/buttons/Button';
 import '../pokemon-page/pokemonpage.css';
 import { getPokemonTypeColor } from '../../utils/getPokemonTypeColor';
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { ThemeContext } from '../../context/ThemeProvider';
+import { PokemonCard } from '../../components/pokemon-card/PokemonCard';
+import { FavoritesContext } from '../../context/FavoriteProvider';
 
 export const PokemonPage = () => {
 	const themeContext = useContext(ThemeContext);
 	const { pokemonInfo } = useGetPokemonPageInfo();
+	const { pokemonEvolutions } = useGetEvolutions();
 	const [isLoading, setIsLoading] = useState(true);
+	const { favorites, toggleFavorite } = useContext(FavoritesContext);
 
 	useEffect(() => {
 		setIsLoading(!pokemonInfo);
@@ -24,7 +29,7 @@ export const PokemonPage = () => {
 			'.pokemon-section'
 		) as HTMLElement | null;
 		const titleElements = document.querySelectorAll(
-			'.pokemon__height, .pokemon__weight, .pokemon-stats, .pokemon-stats__title, .pokemon-stat__name'
+			'.pokemon__height, .pokemon__weight, .pokemon-stats, .pokemon-subtitle, .pokemon-stat__name'
 		) as NodeListOf<HTMLElement>;
 		const infoElement = document.querySelector(
 			'.pokemon-info'
@@ -120,7 +125,7 @@ export const PokemonPage = () => {
 					</div>
 				</div>
 				<div className='pokemon-stats'>
-					<h3 className='pokemon-stats__title'>Stats</h3>
+					<h3 className='pokemon-subtitle'>Stats</h3>
 					<div className='stats-wrapper'>
 						{pokemonInfo.stats.map((stat) => (
 							<div className='pokemon__stat' key={stat.stat.name}>
@@ -138,6 +143,28 @@ export const PokemonPage = () => {
 						))}
 					</div>
 				</div>
+				{pokemonEvolutions.length > 0 && (
+					<div className='pokemon-evolutions-wrapper'>
+						<h3 className='pokemon-subtitle'>Evolutions</h3>
+						<div className='pokemon__evolutions'>
+							{pokemonEvolutions.map((evolution) => (
+								<div className='relative' key={evolution.id}>
+									<Link className='expanded-anchor' to={`/${evolution.id}`} />
+									<PokemonCard
+										key={evolution.id}
+										id={evolution.id}
+										name={evolution.name}
+										types={evolution.types}
+										isListView={false}
+										favorites={favorites}
+										isFavorite={favorites.includes(evolution.id)}
+										toggleFavorite={() => toggleFavorite(evolution.id)}
+									/>
+								</div>
+							))}
+						</div>
+					</div>
+				)}
 				<div className='btn-back'>
 					<Button component={NavLink} to='/'>
 						Back to Pokédex

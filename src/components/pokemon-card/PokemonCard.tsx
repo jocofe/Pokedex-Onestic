@@ -1,20 +1,27 @@
+import { useEffect, useState, useContext } from 'react';
 import { useImageUrl } from '../../hooks/useImageUrl';
 import { PokemonCardProps } from '../../models/pokemoncarddetails';
 import { Socials } from '../socials/Socials';
 import '../pokemon-card/pokemon-card.css';
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
 import { getPokemonTypeColor } from '../../utils/getPokemonTypeColor';
-import { useEffect, useState } from 'react';
+import { FavoritesContext } from '../../context/FavoriteProvider';
 
 export const PokemonCard = (props: PokemonCardProps) => {
-	const { id, name, types = [], isListView, favorites } = props;
+	const { id, name, types = [], isListView } = props;
 	const imageUrl = useImageUrl(id);
 	const capitalizedName = capitalizeFirstLetter(name);
+	const { favorites, toggleFavorite } = useContext(FavoritesContext);
+
 	const [isFavorite, setIsFavorite] = useState(false);
 
 	useEffect(() => {
 		setIsFavorite(favorites.includes(id));
 	}, [id, favorites]);
+
+	const handleFavoriteToggle = () => {
+		toggleFavorite(id);
+	};
 
 	let firstType = '';
 	let backgroundColor = '';
@@ -23,16 +30,6 @@ export const PokemonCard = (props: PokemonCardProps) => {
 		firstType = capitalizeFirstLetter(types[0].type.name);
 		backgroundColor = getPokemonTypeColor(types);
 	}
-
-	const handleFavoriteToggle = () => {
-		const isAlreadyFavorite = favorites.includes(id);
-		const updatedFavorites = isAlreadyFavorite
-			? favorites.filter((fav) => fav !== id)
-			: [...favorites, id];
-		localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
-		setIsFavorite(!isAlreadyFavorite);
-		console.log('Updated favorites:', updatedFavorites);
-	};
 
 	const cardStyle = {
 		backgroundColor: backgroundColor,

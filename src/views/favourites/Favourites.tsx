@@ -119,6 +119,7 @@ export const Favourites = () => {
 								isListView={isListView}
 								favorites={favorites}
 								isFavorite={favorites.includes(pokemon.id)}
+								toggleFavorite={() => {}}
 							/>
 						</div>
 					))}
