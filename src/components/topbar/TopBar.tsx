@@ -37,7 +37,7 @@ export const TopBar = () => {
 				</Link>
 			</div>
 			<SearchBar placeholder='Search' />
-			<Button className='switch-icon' onClick={toggleMode}>
+			<Button color='secondary' className='switch-icon' onClick={toggleMode}>
 				{icon}
 			</Button>
 		</div>
