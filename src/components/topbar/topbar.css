@@ -30,6 +30,10 @@
 	height: 32px;
 }
 
+.switch-icon--light svg {
+	color: var(--color-white);
+}
+
 @media (max-width: 1000px) {
 	.topbar {
 		gap: 32px;

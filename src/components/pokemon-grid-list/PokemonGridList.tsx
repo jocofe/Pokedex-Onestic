@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useFetchPokemonSinnoh } from '../../hooks/useFetchPokemonSinnoh';
 import { PokemonCard } from '../pokemon-card/PokemonCard';
 import { PokemonViewItem } from '../../models/pokemon-view-item';
@@ -6,6 +6,7 @@ import '../pokemon-grid-list/pokemongridlist.css';
 import { Button } from '../buttons/Button';
 import { ListIcon, GridIcon, ArrowLeft, ArrowRight } from '../icons/icons';
 import { Link, useNavigate } from 'react-router-dom';
+import { ThemeContext } from '../../context/ThemeProvider';
 
 export const PokemonGridList = () => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -47,6 +48,24 @@ export const PokemonGridList = () => {
 	const handleFavoritesClick = () => {
 		navigate('/favorites');
 	};
+
+	const themeContext = useContext(ThemeContext);
+
+	useEffect(() => {
+		const pageElements = document.getElementsByClassName(
+			'page'
+		) as HTMLCollectionOf<HTMLElement>;
+
+		if (themeContext?.currentMode === 'dark-mode') {
+			for (let i = 0; i < pageElements.length; i++) {
+				pageElements[i].style.color = 'var(--color-white)';
+			}
+		} else {
+			for (let i = 0; i < pageElements.length; i++) {
+				pageElements[i].style.color = 'var(--color-blackball)';
+			}
+		}
+	}, [themeContext?.currentMode]);
 
 	return (
 		<div className='pokemon-grid-wrapper'>
@@ -91,7 +110,7 @@ export const PokemonGridList = () => {
 						<ArrowLeft className='icon-page' />
 					</button>
 				)}
-				<p>Page {currentPage}</p>
+				<p className='page'>Page {currentPage}</p>
 				{currentPage < totalPages && (
 					<button className='page-btn' onClick={handleNextPage}>
 						<ArrowRight className='icon-page' />

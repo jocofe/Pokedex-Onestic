@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Button } from '../../components/buttons/Button';
 import {
 	GridIcon,
@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { useFetchPokemonSinnoh } from '../../hooks/useFetchPokemonSinnoh';
 import '../../components/pokemon-grid-list/pokemongridlist.css';
 import { PokemonViewItem } from '../../models/pokemon-view-item';
+import { ThemeContext } from '../../context/ThemeProvider';
 
 export const Favourites = () => {
 	const [currentPage, setCurrentPage] = useState(1);
@@ -67,6 +68,24 @@ export const Favourites = () => {
 		navigate('/');
 	};
 
+	const themeContext = useContext(ThemeContext);
+
+	useEffect(() => {
+		const pageElements = document.getElementsByClassName(
+			'page'
+		) as HTMLCollectionOf<HTMLElement>;
+
+		if (themeContext?.currentMode === 'dark-mode') {
+			for (let i = 0; i < pageElements.length; i++) {
+				pageElements[i].style.color = 'var(--color-white)';
+			}
+		} else {
+			for (let i = 0; i < pageElements.length; i++) {
+				pageElements[i].style.color = 'var(--color-blackball)';
+			}
+		}
+	}, [themeContext?.currentMode]);
+
 	return (
 		<div className='pokemon-grid-wrapper'>
 			<div className='button-wrapper'>
@@ -108,7 +127,7 @@ export const Favourites = () => {
 						<ArrowLeft className='icon-page' />
 					</button>
 				)}
-				<p>Page {currentPage}</p>
+				<p className='page'>Page {currentPage}</p>
 				{currentPage < totalPages && (
 					<button className='page-btn' onClick={handleNextPage}>
 						<ArrowRight className='icon-page' />

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useGetPokemonPageInfo } from '../../hooks/useGetPokemonPageInfo';
 import { Loading } from '../../components/icons/icons';
 import { Button } from '../../components/buttons/Button';
@@ -6,14 +6,59 @@ import '../pokemon-page/pokemonpage.css';
 import { getPokemonTypeColor } from '../../utils/getPokemonTypeColor';
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
 import { NavLink } from 'react-router-dom';
+import { ThemeContext } from '../../context/ThemeProvider';
 
 export const PokemonPage = () => {
+	const themeContext = useContext(ThemeContext);
 	const { pokemonInfo } = useGetPokemonPageInfo();
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		if (pokemonInfo) setIsLoading(false);
+		setIsLoading(!pokemonInfo);
 	}, [pokemonInfo]);
+
+	useEffect(() => {
+		if (!themeContext) return;
+
+		const pageElement = document.querySelector(
+			'.pokemon-section'
+		) as HTMLElement | null;
+		const titleElements = document.querySelectorAll(
+			'.pokemon__height, .pokemon__weight, .pokemon-stats, .pokemon-stats__title, .pokemon-stat__name'
+		) as NodeListOf<HTMLElement>;
+		const infoElement = document.querySelector(
+			'.pokemon-info'
+		) as HTMLElement | null;
+		const separatorElements = document.querySelectorAll(
+			'.separator'
+		) as NodeListOf<HTMLElement>;
+
+		if (pageElement) {
+			if (themeContext.currentMode === 'dark-mode') {
+				pageElement.style.backgroundColor = 'var(--color-blackball)';
+				titleElements.forEach((element) => {
+					element.style.color = 'var(--color-white)';
+				});
+				if (infoElement) {
+					infoElement.style.backgroundColor = 'var(--color-blackball)';
+				}
+				separatorElements.forEach((element) => {
+					element.style.backgroundColor = 'var(--color-white)';
+				});
+			} else {
+				pageElement.style.backgroundColor = 'var(--color-white)';
+				titleElements.forEach((element) => {
+					element.style.color = 'var(--color-blackball)';
+				});
+				if (infoElement) {
+					infoElement.style.backgroundColor = 'var(--color-white)';
+				}
+				separatorElements.forEach((element) => {
+					element.style.backgroundColor = 'var(--color-blackball)';
+				});
+			}
+		}
+	}, [themeContext]);
 
 	if (isLoading) {
 		return (
@@ -64,16 +109,18 @@ export const PokemonPage = () => {
 					</div>
 					<div className='pokemon__characteristics'>
 						<div className='pokemon__height'>
-							<h4>Height</h4> {pokemonInfo.height}
+							<h4>Height</h4>{' '}
+							<span className='pokemon-height'>{pokemonInfo.height}</span>
 						</div>
 						<div className='separator'></div>
 						<div className='pokemon__weight'>
-							<h4>Weight</h4> {pokemonInfo.weight}
+							<h4>Weight</h4>{' '}
+							<span className='pokemon-weight'>{pokemonInfo.weight}</span>
 						</div>
 					</div>
 				</div>
 				<div className='pokemon-stats'>
-					<h3>Stats</h3>
+					<h3 className='pokemon-stats__title'>Stats</h3>
 					<div className='stats-wrapper'>
 						{pokemonInfo.stats.map((stat) => (
 							<div className='pokemon__stat' key={stat.stat.name}>
