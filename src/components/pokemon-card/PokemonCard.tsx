@@ -42,7 +42,13 @@ export const PokemonCard = (props: PokemonCardProps) => {
 		return (
 			<div className='pokemon-card' style={cardStyle}>
 				<div className='pokemon-wrapper pokemon-wrapper--list'>
-					<img src={imageUrl} alt={name} className='pokemon-card__image' />
+					<div className='image-card-wrapper'>
+						<img
+							src={imageUrl}
+							alt={name}
+							className='pokemon-card__image--list'
+						/>
+					</div>
 					<div className='pokemon-card__info pokemon-card__info--list'>
 						<h3 className='pokemon__number'>{id}</h3>
 						<h2 className='pokemon__name'>{capitalizedName}</h2>

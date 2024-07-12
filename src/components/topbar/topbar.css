@@ -29,3 +29,10 @@
 	width: 32px;
 	height: 32px;
 }
+
+@media (max-width: 1000px) {
+	.topbar {
+		gap: 32px;
+		padding: 0px 32px 0px 32px;
+	}
+}
