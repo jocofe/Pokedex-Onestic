@@ -35,7 +35,7 @@ export const Favourites = () => {
 	}, []);
 
 	const favoritePokemon = pokemonList.filter((pokemon) =>
-		favorites.includes(pokemon.pokemonId)
+		favorites.includes(pokemon.id)
 	);
 
 	const totalPokemon = favoritePokemon.length;
@@ -92,10 +92,10 @@ export const Favourites = () => {
 					!error &&
 					visiblePokemon.map((pokemon: PokemonViewItem) => (
 						<PokemonCard
-							key={pokemon.pokemonId}
-							pokemonId={pokemon.pokemonId}
-							pokemonName={pokemon.pokemonName}
-							pokemonType={pokemon.pokemonType}
+							key={pokemon.id}
+							id={pokemon.id}
+							name={pokemon.name}
+							types={pokemon.types}
 							isListView={isListView}
 							favorites={favorites}
 							isFavorite={false}

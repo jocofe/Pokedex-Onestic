@@ -5,7 +5,7 @@ import { Toaster } from '../toaster/Toaster';
 import '../socials/socials.css';
 
 export const Socials = (props: SocialsProps) => {
-	const { pokemonName, isFavorite: propIsFavorite, onFavoriteToggle } = props;
+	const { id, isFavorite: propIsFavorite, onFavoriteToggle } = props;
 	const [isFavorite, setIsFavorite] = useState(propIsFavorite);
 	const [isLinkCopied, setIsLinkCopied] = useState(false);
 
@@ -19,7 +19,7 @@ export const Socials = (props: SocialsProps) => {
 			return;
 		}
 		const baseUrl = window.location.origin;
-		const copiedUrl = `${baseUrl}/${pokemonName}`;
+		const copiedUrl = `${baseUrl}/${id}`;
 		navigator.clipboard
 			.writeText(copiedUrl)
 			.then(() => {

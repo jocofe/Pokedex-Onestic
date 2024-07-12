@@ -1,7 +1,7 @@
 export interface SocialsProps {
-	pokemonId?: string;
+	id?: string;
 	className?: string;
-	pokemonName?: string;
+	name?: string;
 	onFavoriteToggle: () => void;
 	isFavorite?: boolean;
 }

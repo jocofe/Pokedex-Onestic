@@ -6,10 +6,8 @@ import '../pokemon-grid-list/pokemongridlist.css';
 import { Button } from '../buttons/Button';
 import { ListIcon, GridIcon, ArrowLeft, ArrowRight } from '../icons/icons';
 import { Link, useNavigate } from 'react-router-dom';
-import { PokemonCardProps } from '../../models/pokemoncarddetails';
 
-export const PokemonGridList = (props: PokemonCardProps) => {
-	const { pokemonName } = props;
+export const PokemonGridList = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [isListView, setIsListView] = useState(false);
 	const [listButtonText, setListButtonText] = useState('List');
@@ -74,17 +72,16 @@ export const PokemonGridList = (props: PokemonCardProps) => {
 				{!isLoading &&
 					!error &&
 					visiblePokemon.map((pokemon: PokemonViewItem) => (
-						<div className='relative'>
+						<div className='relative' key={pokemon.id}>
+							<Link className='expanded-anchor' to={`/${pokemon.id}`} />
 							<PokemonCard
-								key={pokemon.pokemonId}
-								pokemonId={pokemon.pokemonId}
-								pokemonName={pokemon.pokemonName}
-								pokemonType={pokemon.pokemonType}
+								id={pokemon.id}
+								name={pokemon.name}
+								types={pokemon.types}
 								isListView={isListView}
 								favorites={favorites}
-								isFavorite={false}
+								isFavorite={favorites.includes(pokemon.id)}
 							/>
-							<Link className='expanded-anchor' to={`/${pokemonName}`} />
 						</div>
 					))}
 			</div>

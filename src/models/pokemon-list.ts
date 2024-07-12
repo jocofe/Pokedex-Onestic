@@ -10,10 +10,11 @@ export interface PokemonStat {
 	stat: {
 		name: string;
 	};
+	base_stat: number;
 }
 
 export interface PokemonItem {
-	id: number;
+	id: string;
 	name: string;
 	order: number;
 	height: number;

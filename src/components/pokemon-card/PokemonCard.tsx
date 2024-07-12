@@ -3,86 +3,82 @@ import { PokemonCardProps } from '../../models/pokemoncarddetails';
 import { Socials } from '../socials/Socials';
 import '../pokemon-card/pokemon-card.css';
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
-import classNames from 'classnames';
+import { getPokemonTypeColor } from '../../utils/getPokemonTypeColor';
 import { useEffect, useState } from 'react';
 
 export const PokemonCard = (props: PokemonCardProps) => {
-	const { pokemonId, pokemonName, pokemonType, isListView, favorites } = props;
-	const imageUrl = useImageUrl(pokemonId);
-	const capitalizedPokemonName = capitalizeFirstLetter(pokemonName);
+	const { id, name, types = [], isListView, favorites } = props;
+	const imageUrl = useImageUrl(id);
+	const capitalizedName = capitalizeFirstLetter(name);
 	const [isFavorite, setIsFavorite] = useState(false);
 
 	useEffect(() => {
-		setIsFavorite(favorites.includes(pokemonId));
-	}, [pokemonId, favorites]);
+		setIsFavorite(favorites.includes(id));
+	}, [id, favorites]);
 
 	let firstType = '';
-	if (pokemonType.length > 0) {
-		firstType = capitalizeFirstLetter(pokemonType[0].type.name);
+	let backgroundColor = '';
+
+	if (types.length > 0) {
+		firstType = capitalizeFirstLetter(types[0].type.name);
+		backgroundColor = getPokemonTypeColor(types);
 	}
 
-	const cardClass = classNames('pokemon-card', {
-		'pokemon-card--list': isListView,
-	});
-	const wrapperClass = classNames('pokemon-wrapper', {
-		[`background-color--${firstType.toLowerCase()}`]: firstType !== '',
-		'pokemon-wrapper--list': isListView,
-	});
-	const infoClass = classNames('pokemon-card__info', {
-		'pokemon-card__info--list': isListView,
-	});
-
 	const handleFavoriteToggle = () => {
-		const isAlreadyFavorite = favorites.includes(pokemonId);
+		const isAlreadyFavorite = favorites.includes(id);
 		const updatedFavorites = isAlreadyFavorite
-			? favorites.filter((fav) => fav !== pokemonId)
-			: [...favorites, pokemonId];
+			? favorites.filter((fav) => fav !== id)
+			: [...favorites, id];
 		localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
 		setIsFavorite(!isAlreadyFavorite);
 		console.log('Updated favorites:', updatedFavorites);
 	};
 
+	const cardStyle = {
+		backgroundColor: backgroundColor,
+	};
+
 	if (isListView) {
 		return (
-			<div className={cardClass}>
-				<div className={wrapperClass}>
-					<img
-						src={imageUrl}
-						alt={pokemonName}
-						className='pokemon-card__image'
-					/>
-				</div>
-				<div className={infoClass}>
-					<h3 className='pokemon__number'>{pokemonId}</h3>
-					<h2 className='pokemon__name'>{capitalizedPokemonName}</h2>
-					<p className='pokemon__type'>{firstType}</p>
-					<Socials
-						pokemonId={pokemonId}
-						pokemonName={pokemonName}
-						isFavorite={isFavorite}
-						onFavoriteToggle={handleFavoriteToggle}
-					/>
+			<div className='pokemon-card' style={cardStyle}>
+				<div className='pokemon-wrapper pokemon-wrapper--list'>
+					<img src={imageUrl} alt={name} className='pokemon-card__image' />
+					<div className='pokemon-card__info pokemon-card__info--list'>
+						<h3 className='pokemon__number'>{id}</h3>
+						<h2 className='pokemon__name'>{capitalizedName}</h2>
+						<p className='pokemon__type'>{firstType}</p>
+						<div className='pokemon-card__socials'>
+							<Socials
+								id={id}
+								name={name}
+								isFavorite={isFavorite}
+								onFavoriteToggle={handleFavoriteToggle}
+							/>
+						</div>
+					</div>
 				</div>
 			</div>
 		);
 	}
 
 	return (
-		<div className={cardClass}>
-			<div className={wrapperClass}>
-				<div className={infoClass}>
-					<h3 className='pokemon__number'>{pokemonId}</h3>
-					<h2 className='pokemon__name'>{capitalizedPokemonName}</h2>
+		<div className='pokemon-card' style={cardStyle}>
+			<div className='pokemon-wrapper'>
+				<div className='pokemon-card__info'>
+					<h3 className='pokemon__number'>{id}</h3>
+					<h2 className='pokemon__name'>{capitalizedName}</h2>
 					<p className='pokemon__type'>{firstType}</p>
 				</div>
-				<img src={imageUrl} alt={pokemonName} className='pokemon-card__image' />
+				<img src={imageUrl} alt={name} className='pokemon-card__image' />
 			</div>
-			<Socials
-				pokemonId={pokemonId}
-				pokemonName={pokemonName}
-				isFavorite={isFavorite}
-				onFavoriteToggle={handleFavoriteToggle}
-			/>
+			<div className='pokemon-card__socials'>
+				<Socials
+					id={id}
+					name={name}
+					isFavorite={isFavorite}
+					onFavoriteToggle={handleFavoriteToggle}
+				/>
+			</div>
 		</div>
 	);
 };

@@ -1,9 +1,9 @@
 import { PokemonType } from './pokemon-list';
 
 export interface PokemonCardProps {
-	pokemonId: string;
-	pokemonName: string;
-	pokemonType: PokemonType[];
+	id: string;
+	name: string;
+	types: PokemonType[];
 	isListView: boolean;
 	isFavorite: boolean;
 	favorites: string[];

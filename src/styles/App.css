@@ -78,6 +78,16 @@
 	position: absolute;
 }
 
+.expanded-anchor {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	z-index: 1;
+}
+
 .expanded-anchor::after {
 	content: '';
 	position: absolute;
@@ -86,4 +96,14 @@
 	right: 0;
 	bottom: 0;
 	z-index: 1;
+}
+
+.h3 {
+	font-size: var(--font-size-48);
+	font-weight: var(--font-weight-medium);
+}
+
+.h1 {
+	font-size: var(--font-size-72);
+	font-weight: var(--font-weight-bold);
 }
