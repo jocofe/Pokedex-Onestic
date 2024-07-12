@@ -67,9 +67,22 @@
 
 @media (max-width: 800px) {
 	.pokemon-grid {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		width: 100%;
+	}
+
+	.pokemon-grid {
 		grid-template-columns: repeat(1, 1fr);
 	}
 	.pokemon-grid-wrapper {
-		padding: 32px 32px;
+		padding: 16px 16px;
+	}
+	.image-card-wrapper {
+		width: 40%;
+	}
+	.pokemon-card__image--list {
+		width: 200px;
 	}
 }
