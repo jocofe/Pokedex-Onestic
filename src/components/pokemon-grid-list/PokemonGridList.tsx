@@ -9,6 +9,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ThemeContext } from '../../context/ThemeProvider';
 
 export const PokemonGridList = () => {
+	const themeContext = useContext(ThemeContext);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [isListView, setIsListView] = useState(false);
 	const [listButtonText, setListButtonText] = useState('List');
@@ -48,8 +49,6 @@ export const PokemonGridList = () => {
 	const handleFavoritesClick = () => {
 		navigate('/favorites');
 	};
-
-	const themeContext = useContext(ThemeContext);
 
 	useEffect(() => {
 		const pageElements = document.getElementsByClassName(

@@ -6,7 +6,7 @@ import { Button } from '../../components/buttons/Button';
 import '../pokemon-page/pokemonpage.css';
 import { getPokemonTypeColor } from '../../utils/getPokemonTypeColor';
 import { capitalizeFirstLetter } from '../../utils/capitalizeFirstLetter';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { ThemeContext } from '../../context/ThemeProvider';
 import { PokemonCard } from '../../components/pokemon-card/PokemonCard';
 import { FavoritesContext } from '../../context/FavoriteProvider';
@@ -17,6 +17,7 @@ export const PokemonPage = () => {
 	const { pokemonEvolutions } = useGetEvolutions();
 	const [isLoading, setIsLoading] = useState(true);
 	const { favorites, toggleFavorite } = useContext(FavoritesContext);
+	const location = useLocation();
 
 	useEffect(() => {
 		setIsLoading(!pokemonInfo);
@@ -63,7 +64,13 @@ export const PokemonPage = () => {
 				});
 			}
 		}
-	}, [themeContext]);
+	}, [themeContext?.currentMode]);
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [location.pathname]);
+
+	console.log(themeContext?.currentMode);
 
 	if (isLoading) {
 		return (
