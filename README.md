@@ -59,13 +59,13 @@ También mapee la información para darle tipos y propiedades. Posteriormente co
 
 La lógica de favorites está basada en el uso del LocalStorage para persistir la información en la sesión. Tuve que mirar la documentación sobre el uso del LocalStorage y algún artículo para entender su funcionamiento y apoyándome con ChatGPT pude lograr sacar la lógica para que en el componente Socials cuando se le diera al corazón en el componente PokemonCard se guardase la información y así poder representarla en una nueva página dónde solo se ven los favoritos.
 
-<h3>8. Cambio de modo dark-light<h3>
+<h3>8. Cambio de modo dark-light</h3>
 El cambio de modo está incompleto, pues hice un contexto para saber en qué modo está la aplicación pero no funciona bien cuando se navega de la home o favorites a la página de vista del Pokémon. Dentro de la página de pokémon sí que funciona bien el cambio cuando se pulsa el botón de cambiar de modo pero al salir y volver a entrar sucede el mismo fallo. Por falta de tiempo lo he dejado así.
 
-<h3>9. Vista Página Pokémon<h3>
+<h3>9. Vista Página Pokémon</h3>
 
 Aquí al igual que en el componente PokemonCard, que no lo he mencionado antes, he puesto que los tipos y el fondo de la página de pokémon en el header, tengan background-color con variables de css según el tipo de pokémon que sea. Además he hecho unas barras para los stats y he implementado PokemonCards de las evoluciones de dicho pokemon si las tiene. En caso de que no tenga simplemente sale el Pokémon otra vez. Aquí me hubiera gustado que si se le daba al botón de favoritos se guardara, pero la información de este componente es distinta debido al mapeo de la información que viene de la API, al ser otra URL, por falta de tiempo no he podido completarlo. Pero si tiene más evoluciones y haces click en una de ellas, la página se recarga en el top con el nuevo pokémon en vista.
 
-<h3>10. Detalles y notas<h3>
+<h3>10. Detalles y notas</h3>
 
 Quizá al hacer el Design system haya tenido menos tiempo de desarrollo, pero me ha ayudado a plantear las funcionalidades, detalles y demás de la aplicación. Me ha faltado arreglar el cambio de modo dark-light como comentaba anteriormente. El testing no he podido hacerlo tampoco por tiempo pero lo hemos visto en el PostGrado y me hubiera gustado aún que fuera mostrarlo con un botón. También en el diseño planteé el uso de la barra de búsqueda y tampoco he podido implementarlo pero la idea era que en la vista home se pudiera buscar y que saliera la PokemonCard de dicho Pokémon. También, por último, me hubiera gustado refactorizar el código un poco.
