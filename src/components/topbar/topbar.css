@@ -1,0 +1,42 @@
+.topbar {
+	width: auto;
+	height: 100px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	align-content: center;
+	padding: 0px 64px 0px 64px;
+	flex-direction: row;
+	gap: 128px;
+	z-index: 1000;
+}
+
+.topbar__logo {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+	gap: 12px;
+	z-index: 1000;
+}
+
+.switch-icon {
+	width: 32px;
+	height: 32px;
+	z-index: 1000;
+}
+
+.logotype {
+	width: 32px;
+	height: 32px;
+}
+
+.switch-icon--light svg {
+	color: var(--color-white);
+}
+
+@media (max-width: 1000px) {
+	.topbar {
+		gap: 32px;
+		padding: 0px 32px 0px 32px;
+	}
+}

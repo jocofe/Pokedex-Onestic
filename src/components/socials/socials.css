@@ -1,0 +1,10 @@
+.socials-wrapper {
+	display: flex;
+	flex-direction: row;
+	gap: 24px;
+	padding: 16px 16px 16px 16px;
+}
+
+.socials-wrapper--list {
+	padding: 0px 0px;
+}
