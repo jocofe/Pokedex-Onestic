@@ -7,7 +7,7 @@ import {
 	ArrowRight,
 } from '../../components/icons/icons';
 import { PokemonCard } from '../../components/pokemon-card/PokemonCard';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useFetchPokemonSinnoh } from '../../hooks/useFetchPokemonSinnoh';
 import '../../components/pokemon-grid-list/pokemongridlist.css';
 import { PokemonViewItem } from '../../models/pokemon-view-item';
@@ -110,15 +110,17 @@ export const Favourites = () => {
 				{!isLoading &&
 					!error &&
 					visiblePokemon.map((pokemon: PokemonViewItem) => (
-						<PokemonCard
-							key={pokemon.id}
-							id={pokemon.id}
-							name={pokemon.name}
-							types={pokemon.types}
-							isListView={isListView}
-							favorites={favorites}
-							isFavorite={false}
-						/>
+						<div className='relative' key={pokemon.id}>
+							<Link className='expanded-anchor' to={`/${pokemon.id}`} />
+							<PokemonCard
+								id={pokemon.id}
+								name={pokemon.name}
+								types={pokemon.types}
+								isListView={isListView}
+								favorites={favorites}
+								isFavorite={favorites.includes(pokemon.id)}
+							/>
+						</div>
 					))}
 			</div>
 			<div className='pokemon-grid__controls'>
