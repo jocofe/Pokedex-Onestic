@@ -21,7 +21,6 @@ export const ThemeProvider = ({ children }: ThemeProviderProps) => {
 	const toggleMode = () => {
 		const newMode = currentMode === 'light-mode' ? 'dark-mode' : 'light-mode';
 		setCurrentMode(newMode);
-		console.log(newMode);
 	};
 
 	const themeContextValue: ThemeContextType = {
