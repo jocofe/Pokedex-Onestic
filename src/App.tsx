@@ -9,12 +9,12 @@ import { FavoritesProvider } from './context/FavoriteProvider';
 function App() {
 	return (
 		<React.StrictMode>
-			<ThemeProvider>
-				<FavoritesProvider>
+			<FavoritesProvider>
+				<ThemeProvider>
 					<TopBar />
 					<Outlet />
-				</FavoritesProvider>
-			</ThemeProvider>
+				</ThemeProvider>
+			</FavoritesProvider>
 		</React.StrictMode>
 	);
 }

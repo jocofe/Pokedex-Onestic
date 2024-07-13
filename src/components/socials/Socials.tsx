@@ -49,7 +49,7 @@ export const Socials = (props: SocialsProps) => {
 			</div>
 			{isLinkCopied && (
 				<Toaster
-					message='Copied Link!'
+					message='Link copied!'
 					onClose={() => setIsLinkCopied(false)}
 				/>
 			)}
