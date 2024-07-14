@@ -1,12 +1,10 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { Button } from '../../components/buttons/Button';
 import { PokemonCard } from '../../components/pokemon-card/PokemonCard';
 import { Link, NavLink } from 'react-router-dom';
 import { useFetchPokemonSinnoh } from '../../hooks/useFetchPokemonSinnoh';
 import '../../components/pokemon-grid-list/pokemongridlist.css';
 import { PokemonViewItem } from '../../models/pokemon-view-item';
-import { ThemeContext } from '../../context/ThemeProvider';
-import { useApplyTheme } from '../../utils/applyTheme';
 import { PaginationControls } from '../../components/pagination-control/PaginationControls';
 import { PokemonListViewToggle } from '../../components/pokemon-list-view-toggle.tsx/PokemonListViewToggle';
 import { usePagination } from '../../hooks/usePagination';
@@ -14,11 +12,9 @@ import { FavoritesContext } from '../../context/FavoriteProvider';
 
 export const Favorites = () => {
 	const [currentPage, setCurrentPage] = useState(1);
-	const themeContext = useContext(ThemeContext);
 	const [isListView, setIsListView] = useState(false);
 	const { favorites } = useContext(FavoritesContext);
 	const { pokemonList, error, isLoading } = useFetchPokemonSinnoh();
-	const applyTheme = useApplyTheme();
 
 	const favoritePokemon = pokemonList.filter((pokemon) =>
 		favorites.includes(pokemon.id)
@@ -45,12 +41,6 @@ export const Favorites = () => {
 	const toggleListView = () => {
 		setIsListView((prev) => !prev);
 	};
-
-	useEffect(() => {
-		if (themeContext) {
-			applyTheme(themeContext.currentMode);
-		}
-	}, [themeContext, applyTheme]);
 
 	return (
 		<div className='pokemon-grid-wrapper'>
