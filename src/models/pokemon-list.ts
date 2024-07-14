@@ -17,8 +17,8 @@ export interface PokemonItem {
 	id: string;
 	name: string;
 	order: number;
-	height: number;
-	weight: number;
+	height?: number;
+	weight?: number;
 	types: PokemonType[];
-	stats: PokemonStat[];
+	stats?: PokemonStat[];
 }

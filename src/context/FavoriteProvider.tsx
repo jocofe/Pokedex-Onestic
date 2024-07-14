@@ -1,13 +1,8 @@
-import { createContext, ReactNode, useEffect, useState } from 'react';
-
-export interface FavoritesContextType {
-	favorites: string[];
-	toggleFavorite: (id: string) => void;
-}
-
-export interface FavoriteProviderProps {
-	children: ReactNode;
-}
+import { createContext, useEffect, useState } from 'react';
+import {
+	FavoriteProviderProps,
+	FavoritesContextType,
+} from '../models/favorites-provider';
 
 export const FavoritesContext = createContext<FavoritesContextType>({
 	favorites: [],

@@ -4,30 +4,27 @@ import { PokemonCard } from '../pokemon-card/PokemonCard';
 import { PokemonViewItem } from '../../models/pokemon-view-item';
 import '../pokemon-grid-list/pokemongridlist.css';
 import { Button } from '../buttons/Button';
-import { ListIcon, GridIcon, ArrowLeft, ArrowRight } from '../icons/icons';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { ThemeContext } from '../../context/ThemeProvider';
+import { FavoritesContext } from '../../context/FavoriteProvider';
+import { PokemonListViewToggle } from '../pokemon-list-view-toggle.tsx/PokemonListViewToggle';
+import { PaginationControls } from '../pagination-control/PaginationControls';
+import { usePagination } from '../../hooks/usePagination';
+import { useApplyTheme } from '../../utils/applyTheme';
 
 export const PokemonGridList = () => {
 	const themeContext = useContext(ThemeContext);
+	const { favorites, toggleFavorite } = useContext(FavoritesContext);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [isListView, setIsListView] = useState(false);
-	const [listButtonText, setListButtonText] = useState('List');
 	const { pokemonList, error, isLoading } = useFetchPokemonSinnoh();
-	const [favorites] = useState<string[]>(() => {
-		const storedFavorites = JSON.parse(
-			localStorage.getItem('favorites') || '[]'
-		);
-		return storedFavorites;
-	});
-	const navigate = useNavigate();
+	const applyTheme = useApplyTheme();
 
-	const pokemonPerPage = 12;
-	const totalPokemon = pokemonList.length;
-	const totalPages = Math.ceil(totalPokemon / pokemonPerPage);
-	const startIndex = (currentPage - 1) * pokemonPerPage;
-	const endIndex = startIndex + pokemonPerPage;
-	const visiblePokemon = pokemonList.slice(startIndex, endIndex);
+	const { paginatedItems: visiblePokemon, totalPages } = usePagination({
+		items: pokemonList,
+		currentPage,
+		itemsPerPage: 12,
+	});
 
 	const handleNextPage = () => {
 		if (currentPage < totalPages) {
@@ -43,41 +40,22 @@ export const PokemonGridList = () => {
 
 	const toggleListView = () => {
 		setIsListView((prev) => !prev);
-		setListButtonText((prev) => (prev === 'List' ? 'Grid' : 'List'));
-	};
-
-	const handleFavoritesClick = () => {
-		navigate('/favorites');
 	};
 
 	useEffect(() => {
-		const pageElements = document.getElementsByClassName(
-			'page'
-		) as HTMLCollectionOf<HTMLElement>;
-
-		if (themeContext?.currentMode === 'dark-mode') {
-			for (let i = 0; i < pageElements.length; i++) {
-				pageElements[i].style.color = 'var(--color-white)';
-			}
-		} else {
-			for (let i = 0; i < pageElements.length; i++) {
-				pageElements[i].style.color = 'var(--color-blackball)';
-			}
+		if (themeContext) {
+			applyTheme(themeContext.currentMode);
 		}
-	}, [themeContext?.currentMode]);
+	}, [themeContext, applyTheme]);
 
 	return (
 		<div className='pokemon-grid-wrapper'>
 			<div className='button-wrapper'>
-				<Button color='secondary' onClick={toggleListView}>
-					{isListView ? (
-						<GridIcon className='grid-icon' />
-					) : (
-						<ListIcon className='grid-icon' />
-					)}
-					{listButtonText}
-				</Button>
-				<Button color='secondary' onClick={handleFavoritesClick}>
+				<PokemonListViewToggle
+					isListView={isListView}
+					onToggle={toggleListView}
+				/>
+				<Button color='secondary' component={NavLink} to='/favorites'>
 					Favorites
 				</Button>
 			</div>
@@ -99,24 +77,17 @@ export const PokemonGridList = () => {
 								isListView={isListView}
 								favorites={favorites}
 								isFavorite={favorites.includes(pokemon.id)}
-								toggleFavorite={() => {}}
+								toggleFavorite={() => toggleFavorite(pokemon.id)}
 							/>
 						</div>
 					))}
 			</div>
-			<div className='pokemon-grid__controls'>
-				{currentPage > 1 && (
-					<button className='page-btn' onClick={handlePrevPage}>
-						<ArrowLeft className='icon-page' />
-					</button>
-				)}
-				<p className='page'>Page {currentPage}</p>
-				{currentPage < totalPages && (
-					<button className='page-btn' onClick={handleNextPage}>
-						<ArrowRight className='icon-page' />
-					</button>
-				)}
-			</div>
+			<PaginationControls
+				currentPage={currentPage}
+				totalPages={totalPages}
+				onPrevPage={handlePrevPage}
+				onNextPage={handleNextPage}
+			/>
 		</div>
 	);
 };
