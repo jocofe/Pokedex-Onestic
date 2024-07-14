@@ -24,7 +24,6 @@ export const PokemonEvolutions = ({
 							isListView={false}
 							isFavorite={favorites.includes(evolution.id)}
 							toggleFavorite={() => toggleFavorite(evolution.id)}
-							favorites={[]}
 						/>
 					</div>
 				))}

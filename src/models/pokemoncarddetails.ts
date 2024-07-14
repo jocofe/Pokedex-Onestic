@@ -6,6 +6,5 @@ export interface PokemonCardProps {
 	types: PokemonType[];
 	isListView: boolean;
 	isFavorite: boolean;
-	favorites: string[];
 	toggleFavorite: () => void;
 }

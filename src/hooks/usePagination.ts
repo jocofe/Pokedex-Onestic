@@ -1,15 +1,8 @@
 import { useMemo } from 'react';
-
-interface UsePaginationProps<Pokemon> {
-	items: Pokemon[];
-	currentPage: number;
-	itemsPerPage: number;
-}
-
-interface UsePaginationResult<Pokemon> {
-	paginatedItems: Pokemon[];
-	totalPages: number;
-}
+import {
+	UsePaginationProps,
+	UsePaginationResult,
+} from '../models/pagination-props';
 
 export const usePagination = <Pokemon>({
 	items,
