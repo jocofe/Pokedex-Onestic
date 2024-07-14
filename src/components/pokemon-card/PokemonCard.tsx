@@ -12,7 +12,6 @@ export const PokemonCard = (props: PokemonCardProps) => {
 	const imageUrl = useImageUrl(id);
 	const capitalizedName = capitalizeFirstLetter(name);
 	const { favorites, toggleFavorite } = useContext(FavoritesContext);
-
 	const [isFavorite, setIsFavorite] = useState(false);
 
 	useEffect(() => {

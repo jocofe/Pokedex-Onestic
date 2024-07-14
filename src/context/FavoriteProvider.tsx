@@ -1,12 +1,8 @@
-import { createContext, ReactNode, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 export interface FavoritesContextType {
 	favorites: string[];
 	toggleFavorite: (id: string) => void;
-}
-
-export interface FavoriteProviderProps {
-	children: ReactNode;
 }
 
 export const FavoritesContext = createContext<FavoritesContextType>({
@@ -14,7 +10,11 @@ export const FavoritesContext = createContext<FavoritesContextType>({
 	toggleFavorite: () => {},
 });
 
-export const FavoritesProvider = ({ children }: FavoriteProviderProps) => {
+export const FavoritesProvider = ({
+	children,
+}: {
+	children: React.ReactNode;
+}) => {
 	const [favorites, setFavorites] = useState<string[]>([]);
 
 	useEffect(() => {
@@ -22,6 +22,7 @@ export const FavoritesProvider = ({ children }: FavoriteProviderProps) => {
 			localStorage.getItem('favorites') || '[]'
 		);
 		setFavorites(storedFavorites);
+		console.log(storedFavorites);
 	}, []);
 
 	const toggleFavorite = (id: string) => {
@@ -32,6 +33,7 @@ export const FavoritesProvider = ({ children }: FavoriteProviderProps) => {
 		localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
 		setFavorites(updatedFavorites);
 	};
+
 	return (
 		<FavoritesContext.Provider value={{ favorites, toggleFavorite }}>
 			{children}

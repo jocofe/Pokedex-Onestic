@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
 import { Home } from './views/home/Home';
 import { PokemonPage } from './views/pokemon-page/PokemonPage';
-import { Favourites } from './views/favourites/Favourites';
+import { Favorites } from './views/favorites/Favorites';
 
 export const router = createBrowserRouter([
 	{
@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
 			},
 			{
 				path: '/favorites',
-				element: <Favourites />,
+				element: <Favorites />,
 			},
 		],
 	},

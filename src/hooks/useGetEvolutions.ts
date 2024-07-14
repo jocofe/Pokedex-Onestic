@@ -1,25 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import { PokemonType } from '../models/pokemon-list';
-
-export interface EvolutionItem {
-	id: string;
-	name: string;
-	types: PokemonType[];
-}
-
-interface EvolutionChain {
-	chain: EvolutionDetail;
-}
-
-interface EvolutionDetail {
-	species: {
-		name: string;
-		url: string;
-	};
-	evolves_to: EvolutionDetail[];
-}
+import {
+	EvolutionChain,
+	EvolutionDetail,
+	EvolutionItem,
+} from '../models/pokemon-evolutions';
 
 const getEvolutionChain = async (url: string): Promise<EvolutionChain> => {
 	const response = await axios.get(url);
