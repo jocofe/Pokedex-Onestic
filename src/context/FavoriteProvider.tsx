@@ -1,9 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-
-export interface FavoritesContextType {
-	favorites: string[];
-	toggleFavorite: (id: string) => void;
-}
+import { FavoritesContextType } from '../models/favorites-provider';
 
 export const FavoritesContext = createContext<FavoritesContextType>({
 	favorites: [],
@@ -31,7 +27,6 @@ export const FavoritesProvider = ({
 			: [...favorites, id];
 		localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
 		setFavorites(updatedFavorites);
-		console.log(updatedFavorites);
 	};
 
 	return (

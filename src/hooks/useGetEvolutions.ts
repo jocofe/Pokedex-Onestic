@@ -55,7 +55,6 @@ export const useGetEvolutions = () => {
 				);
 
 				setPokemonEvolutions(mappedEvolutions);
-				console.log(mappedEvolutions);
 			} catch (error) {
 				console.error('Error fetching Pokémon evolution details:', error);
 			}
