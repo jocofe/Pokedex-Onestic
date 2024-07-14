@@ -73,8 +73,8 @@ export const PokemonGridList = () => {
 								name={pokemon.name}
 								types={pokemon.types}
 								isListView={isListView}
-								isFavorite={favorites.includes(pokemon.id)}
-								toggleFavorite={() => toggleFavorite(pokemon.id)}
+								isFavorite={favorites.includes(String(pokemon.id))}
+								toggleFavorite={() => toggleFavorite(String(pokemon.id))}
 							/>
 						</div>
 					))}

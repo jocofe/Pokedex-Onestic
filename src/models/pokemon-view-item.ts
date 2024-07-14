@@ -1,7 +1,7 @@
 import { PokemonStat, PokemonType } from './pokemon-list';
 
 export interface PokemonViewItem {
-	id: string;
+	id: string | number;
 	name: string;
 	order: number;
 	height?: number;

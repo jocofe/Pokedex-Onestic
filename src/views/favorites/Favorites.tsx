@@ -1,4 +1,4 @@
-import { useState, useContext, useMemo } from 'react';
+import { useState, useContext } from 'react';
 import { Button } from '../../components/buttons/Button';
 import { PokemonCard } from '../../components/pokemon-card/PokemonCard';
 import { Link, NavLink } from 'react-router-dom';
@@ -9,27 +9,19 @@ import { PaginationControls } from '../../components/pagination-control/Paginati
 import { PokemonListViewToggle } from '../../components/pokemon-list-view-toggle.tsx/PokemonListViewToggle';
 import { usePagination } from '../../hooks/usePagination';
 import { FavoritesContext } from '../../context/FavoriteProvider';
-import { useSearch } from '../../hooks/useSearch';
 
 export const Favorites = () => {
 	const [currentPage, setCurrentPage] = useState(1);
-	const { searchTerm } = useSearch();
 	const [isListView, setIsListView] = useState(false);
 	const { favorites } = useContext(FavoritesContext);
 	const { pokemonList, error, isLoading } = useFetchPokemonSinnoh();
 
 	const favoritePokemon = pokemonList.filter((pokemon) =>
-		favorites.includes(pokemon.id)
+		favorites.includes(String(pokemon.id))
 	);
 
-	const filteredPokemonList = useMemo(() => {
-		return favoritePokemon.filter((pokemon) =>
-			pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
-		);
-	}, [favoritePokemon, searchTerm]);
-
 	const { paginatedItems: visiblePokemon, totalPages } = usePagination({
-		items: filteredPokemonList,
+		items: favoritePokemon,
 		currentPage,
 		itemsPerPage: 12,
 	});
@@ -77,7 +69,7 @@ export const Favorites = () => {
 								name={pokemon.name}
 								types={pokemon.types}
 								isListView={isListView}
-								isFavorite={favorites.includes(pokemon.id)}
+								isFavorite={favorites.includes(String(pokemon.id))}
 								toggleFavorite={() => {}}
 							/>
 						</div>

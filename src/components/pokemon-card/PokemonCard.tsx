@@ -9,17 +9,17 @@ import { FavoritesContext } from '../../context/FavoriteProvider';
 
 export const PokemonCard = (props: PokemonCardProps) => {
 	const { id, name, types = [], isListView } = props;
-	const imageUrl = useImageUrl(id);
+	const imageUrl = useImageUrl(String(id));
 	const capitalizedName = capitalizeFirstLetter(name);
 	const { favorites, toggleFavorite } = useContext(FavoritesContext);
 	const [isFavorite, setIsFavorite] = useState(false);
 
 	useEffect(() => {
-		setIsFavorite(favorites.includes(id));
+		setIsFavorite(favorites.includes(String(id)));
 	}, [id, favorites]);
 
 	const handleFavoriteToggle = () => {
-		toggleFavorite(id);
+		toggleFavorite(String(id));
 	};
 
 	let firstType = '';
@@ -51,7 +51,7 @@ export const PokemonCard = (props: PokemonCardProps) => {
 						<p className='pokemon__type'>{firstType}</p>
 						<div className='pokemon-card__socials'>
 							<Socials
-								id={id}
+								id={String(id)}
 								name={name}
 								isFavorite={isFavorite}
 								onFavoriteToggle={handleFavoriteToggle}

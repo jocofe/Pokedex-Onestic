@@ -30,8 +30,8 @@ export const PokemonEvolutions = ({ evolutions }: PokemonEvolutionsProps) => {
 							name={evolution.name}
 							types={evolution.types}
 							isListView={false}
-							isFavorite={favorites.includes(evolution.id)}
-							toggleFavorite={() => toggleFavorite(evolution.id)}
+							isFavorite={favorites.includes(String(evolution.id))}
+							toggleFavorite={() => toggleFavorite(String(evolution.id))}
 						/>
 					</div>
 				))}

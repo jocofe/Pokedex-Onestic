@@ -14,7 +14,7 @@ export interface PokemonStat {
 }
 
 export interface PokemonItem {
-	id: string;
+	id: string | number;
 	name: string;
 	order: number;
 	height?: number;

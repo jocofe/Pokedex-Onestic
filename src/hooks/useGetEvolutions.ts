@@ -27,7 +27,7 @@ const mapEvolutionChain = async (
 		const types = pokemonData.data.types;
 
 		evolutions.push({
-			id,
+			id: String(id),
 			name,
 			types,
 		});
