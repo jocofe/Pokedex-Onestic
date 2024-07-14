@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { useFetchPokemonSinnoh } from '../../hooks/useFetchPokemonSinnoh';
 import { PokemonCard } from '../pokemon-card/PokemonCard';
 import { PokemonViewItem } from '../../models/pokemon-view-item';
@@ -9,15 +9,23 @@ import { FavoritesContext } from '../../context/FavoriteProvider';
 import { PokemonListViewToggle } from '../pokemon-list-view-toggle.tsx/PokemonListViewToggle';
 import { PaginationControls } from '../pagination-control/PaginationControls';
 import { usePagination } from '../../hooks/usePagination';
+import { useSearch } from '../../hooks/useSearch';
 
 export const PokemonGridList = () => {
 	const { favorites, toggleFavorite } = useContext(FavoritesContext);
+	const { searchTerm } = useSearch();
 	const [currentPage, setCurrentPage] = useState(1);
 	const [isListView, setIsListView] = useState(false);
 	const { pokemonList, error, isLoading } = useFetchPokemonSinnoh();
 
+	const filteredPokemonList = useMemo(() => {
+		return pokemonList.filter((pokemon) =>
+			pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+		);
+	}, [pokemonList, searchTerm]);
+
 	const { paginatedItems: visiblePokemon, totalPages } = usePagination({
-		items: pokemonList,
+		items: filteredPokemonList,
 		currentPage,
 		itemsPerPage: 12,
 	});

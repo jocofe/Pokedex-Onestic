@@ -1,15 +1,38 @@
-import classNames from 'classnames';
 import { Searchglass } from '../icons/icons';
 import { SearchBarProps } from '../../models/searchbar';
 import '../searchbar/searchbar.css';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export const SearchBar = ({ placeholder = 'Search' }: SearchBarProps) => {
-	const searchBarClass = classNames('searchbar');
+export const SearchBar = ({
+	placeholder = 'Search',
+	setSearchTerm,
+}: SearchBarProps) => {
+	const [inputValue, setInputValue] = useState('');
+	const navigate = useNavigate();
+
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setInputValue(e.target.value);
+		setSearchTerm(e.target.value);
+	};
+
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+		e.preventDefault();
+		setSearchTerm(inputValue);
+		navigate('/');
+	};
 
 	return (
-		<form className='searchbar-wrapper'>
-			<input className={searchBarClass} placeholder={placeholder} />
-			<Searchglass className='icon--absolute' />
+		<form className='searchbar-wrapper' onSubmit={handleSubmit}>
+			<input
+				className='searchbar'
+				placeholder={placeholder}
+				value={inputValue}
+				onChange={handleInputChange}
+			/>
+			<button type='submit' className='icon-wrapper'>
+				<Searchglass className='icon--absolute' />
+			</button>
 		</form>
 	);
 };

@@ -5,9 +5,11 @@ import { Link } from 'react-router-dom';
 import { SearchBar } from '../searchbar/SearchBar';
 import '../topbar/topbar.css';
 import { Button } from '../buttons/Button';
+import { useSearch } from '../../hooks/useSearch';
 
 export const TopBar = () => {
 	const themeContext = useContext(ThemeContext);
+	const { setSearchTerm } = useSearch();
 
 	if (!themeContext) {
 		throw new Error('useTheme must be used within a ThemeProvider');
@@ -36,7 +38,7 @@ export const TopBar = () => {
 					<Logotype className='logotype' />
 				</Link>
 			</div>
-			<SearchBar placeholder='Search' />
+			<SearchBar placeholder='Search' setSearchTerm={setSearchTerm} />
 			<Button color='secondary' className='switch-icon' onClick={toggleMode}>
 				{icon}
 			</Button>
