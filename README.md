@@ -69,3 +69,7 @@ Aquí al igual que en el componente PokemonCard, que no lo he mencionado antes, 
 <h3>10. Detalles y notas</h3>
 
 Quizá al hacer el Design system haya tenido menos tiempo de desarrollo, pero me ha ayudado a plantear las funcionalidades, detalles y demás de la aplicación. Me ha faltado arreglar el cambio de modo dark-light como comentaba anteriormente. El testing no he podido hacerlo tampoco por tiempo pero lo hemos visto en el PostGrado y me hubiera gustado aún que fuera mostrarlo con un botón. También en el diseño planteé el uso de la barra de búsqueda y tampoco he podido implementarlo pero la idea era que en la vista home se pudiera buscar y que saliera la PokemonCard de dicho Pokémon. También, por último, me hubiera gustado refactorizar el código un poco.
+
+ACTUALIZADO [14/07/2024]
+
+Sé que estos cambios están fuera de tiempo pero quería arreglar por lo menos la versión dark-mode de la aplicación que me había complicado bastante con la lógica para lograrla y he conseguido simplificarla con un context haciendo cambios en las clases dependiendo del valor de ese context. También he refactorizado el código y estoy arreglando el tema de favorites con las tarjetas de Evolutions de la página de Pokémon. Quisiera añadir el searchbar funcional y si puedo meter un testing para así completar la prueba. Entiendo que puede que no se tenga en cuenta por estar fuera de tiempo pero quería dejarlo lo mejor posible.
