@@ -31,6 +31,7 @@ export const FavoritesProvider = ({
 			: [...favorites, id];
 		localStorage.setItem('favorites', JSON.stringify(updatedFavorites));
 		setFavorites(updatedFavorites);
+		console.log(updatedFavorites);
 	};
 
 	return (

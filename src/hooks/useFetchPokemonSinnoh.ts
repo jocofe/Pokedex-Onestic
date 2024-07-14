@@ -32,6 +32,7 @@ export const useFetchPokemonSinnoh = () => {
 				);
 
 				setPokemonList(mappedPokemonList);
+				console.log(mappedPokemonList);
 			} catch (err) {
 				setError('Failed to fetch pokemon data');
 			} finally {
