@@ -7,7 +7,7 @@ export interface PokemonEvolutionsProps {
 }
 
 export interface EvolutionItem {
-	id: number;
+	id: string;
 	name: string;
 	types: PokemonType[];
 }
