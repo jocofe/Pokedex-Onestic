@@ -1,12 +1,12 @@
+import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { FavoritesContext } from '../../context/FavoriteProvider';
 import { PokemonCard } from '../../components/pokemon-card/PokemonCard';
 import { PokemonEvolutionsProps } from '../../models/pokemon-evolutions';
 
-export const PokemonEvolutions = ({
-	evolutions,
-	favorites,
-	toggleFavorite,
-}: PokemonEvolutionsProps) => {
+export const PokemonEvolutions = ({ evolutions }: PokemonEvolutionsProps) => {
+	const { favorites, toggleFavorite } = useContext(FavoritesContext);
+
 	if (evolutions.length === 0) return null;
 
 	return (

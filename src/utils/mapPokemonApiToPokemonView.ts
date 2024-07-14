@@ -8,10 +8,10 @@ export const mapPokemonApiToPokemonView = (
 		id: pokemon.id,
 		name: pokemon.name,
 		order: pokemon.order,
-		height: pokemon.height,
-		weight: pokemon.weight,
+		height: pokemon.height || 0,
+		weight: pokemon.weight || 0,
 		types: pokemon.types,
-		stats: pokemon.stats,
+		stats: pokemon.stats || [],
 		isListView: false,
 	};
 };

@@ -1,17 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { Heart, FullHeart, CopyLink } from '../icons/icons';
 import { SocialsProps } from '../../models/socials';
 import { Toaster } from '../toaster/Toaster';
 import '../socials/socials.css';
+import { FavoritesContext } from '../../context/FavoriteProvider';
 
 export const Socials = (props: SocialsProps) => {
-	const { id, isFavorite: propIsFavorite, onFavoriteToggle } = props;
-	const [isFavorite, setIsFavorite] = useState(propIsFavorite);
+	const { id } = props;
+	const { favorites, toggleFavorite } = useContext(FavoritesContext);
 	const [isLinkCopied, setIsLinkCopied] = useState(false);
 
-	useEffect(() => {
-		setIsFavorite(propIsFavorite);
-	}, [propIsFavorite]);
+	const isFavorite = id !== undefined && favorites.includes(id);
 
 	const copyArtworkLink = () => {
 		if (!navigator.clipboard) {
@@ -33,13 +32,21 @@ export const Socials = (props: SocialsProps) => {
 			});
 	};
 
+	const handleFavoriteToggle = () => {
+		if (id) {
+			toggleFavorite(id);
+		}
+	};
+
 	return (
 		<>
 			<div className='socials-wrapper'>
 				<div onClick={copyArtworkLink} className='icon-wrapper'>
 					<CopyLink className='icon' />
 				</div>
-				<div onClick={onFavoriteToggle} className='icon-wrapper button-icon'>
+				<div
+					onClick={handleFavoriteToggle}
+					className='icon-wrapper button-icon'>
 					{isFavorite ? (
 						<FullHeart className='icon' />
 					) : (
