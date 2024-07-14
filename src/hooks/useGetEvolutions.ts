@@ -19,7 +19,7 @@ const mapEvolutionChain = async (
 
 	let current: EvolutionDetail | undefined = chain;
 	while (current) {
-		const id = current.species.url.split('/').slice(-2, -1)[0];
+		const id = parseInt(current.species.url.split('/').slice(-2, -1)[0], 10);
 		const name = current.species.name;
 		const pokemonData = await axios.get(
 			`https://pokeapi.co/api/v2/pokemon/${id}`
@@ -27,7 +27,7 @@ const mapEvolutionChain = async (
 		const types = pokemonData.data.types;
 
 		evolutions.push({
-			id,
+			id: String(id),
 			name,
 			types,
 		});

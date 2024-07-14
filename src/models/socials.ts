@@ -1,5 +1,5 @@
 export interface SocialsProps {
-	id?: string;
+	id?: string | number;
 	className?: string;
 	name?: string;
 	onFavoriteToggle: () => void;

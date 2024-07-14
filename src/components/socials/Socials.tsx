@@ -10,7 +10,7 @@ export const Socials = (props: SocialsProps) => {
 	const { favorites, toggleFavorite } = useContext(FavoritesContext);
 	const [isLinkCopied, setIsLinkCopied] = useState(false);
 
-	const isFavorite = id !== undefined && favorites.includes(id);
+	const isFavorite = id !== undefined && favorites.includes(String(id));
 
 	const copyArtworkLink = () => {
 		if (!navigator.clipboard) {
@@ -34,7 +34,7 @@ export const Socials = (props: SocialsProps) => {
 
 	const handleFavoriteToggle = () => {
 		if (id) {
-			toggleFavorite(id);
+			toggleFavorite(String(id));
 		}
 	};
 

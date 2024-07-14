@@ -17,7 +17,7 @@ export const Favorites = () => {
 	const { pokemonList, error, isLoading } = useFetchPokemonSinnoh();
 
 	const favoritePokemon = pokemonList.filter((pokemon) =>
-		favorites.includes(pokemon.id)
+		favorites.includes(String(pokemon.id))
 	);
 
 	const { paginatedItems: visiblePokemon, totalPages } = usePagination({
@@ -69,7 +69,7 @@ export const Favorites = () => {
 								name={pokemon.name}
 								types={pokemon.types}
 								isListView={isListView}
-								isFavorite={favorites.includes(pokemon.id)}
+								isFavorite={favorites.includes(String(pokemon.id))}
 								toggleFavorite={() => {}}
 							/>
 						</div>

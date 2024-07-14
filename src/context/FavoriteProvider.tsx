@@ -1,9 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-
-export interface FavoritesContextType {
-	favorites: string[];
-	toggleFavorite: (id: string) => void;
-}
+import { FavoritesContextType } from '../models/favorites-provider';
 
 export const FavoritesContext = createContext<FavoritesContextType>({
 	favorites: [],
