@@ -1,24 +1,20 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import { useFetchPokemonSinnoh } from '../../hooks/useFetchPokemonSinnoh';
 import { PokemonCard } from '../pokemon-card/PokemonCard';
 import { PokemonViewItem } from '../../models/pokemon-view-item';
 import '../pokemon-grid-list/pokemongridlist.css';
 import { Button } from '../buttons/Button';
 import { Link, NavLink } from 'react-router-dom';
-import { ThemeContext } from '../../context/ThemeProvider';
 import { FavoritesContext } from '../../context/FavoriteProvider';
 import { PokemonListViewToggle } from '../pokemon-list-view-toggle.tsx/PokemonListViewToggle';
 import { PaginationControls } from '../pagination-control/PaginationControls';
 import { usePagination } from '../../hooks/usePagination';
-import { useApplyTheme } from '../../utils/applyTheme';
 
 export const PokemonGridList = () => {
-	const themeContext = useContext(ThemeContext);
 	const { favorites, toggleFavorite } = useContext(FavoritesContext);
 	const [currentPage, setCurrentPage] = useState(1);
 	const [isListView, setIsListView] = useState(false);
 	const { pokemonList, error, isLoading } = useFetchPokemonSinnoh();
-	const applyTheme = useApplyTheme();
 
 	const { paginatedItems: visiblePokemon, totalPages } = usePagination({
 		items: pokemonList,
@@ -41,12 +37,6 @@ export const PokemonGridList = () => {
 	const toggleListView = () => {
 		setIsListView((prev) => !prev);
 	};
-
-	useEffect(() => {
-		if (themeContext) {
-			applyTheme(themeContext.currentMode);
-		}
-	}, [themeContext, applyTheme]);
 
 	return (
 		<div className='pokemon-grid-wrapper'>

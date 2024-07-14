@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { ThemeContext } from '../../context/ThemeProvider';
 import { PaginationControlsProps } from '../../models/pagination-controls';
 import { ArrowLeft, ArrowRight } from '../icons/icons';
 
@@ -7,6 +9,8 @@ export const PaginationControls = ({
 	onPrevPage,
 	onNextPage,
 }: PaginationControlsProps) => {
+	const themeContext = useContext(ThemeContext);
+
 	return (
 		<div className='pokemon-grid__controls'>
 			{currentPage > 1 && (
@@ -14,7 +18,12 @@ export const PaginationControls = ({
 					<ArrowLeft className='icon-page' />
 				</button>
 			)}
-			<p className='page'>Page {currentPage}</p>
+			<p
+				className={
+					themeContext?.currentMode === 'dark-mode' ? 'page--dark' : 'page'
+				}>
+				Page {currentPage}
+			</p>
 			{currentPage < totalPages && (
 				<button className='page-btn' onClick={onNextPage}>
 					<ArrowRight className='icon-page' />

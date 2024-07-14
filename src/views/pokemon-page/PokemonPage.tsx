@@ -4,24 +4,20 @@ import { useGetEvolutions } from '../../hooks/useGetEvolutions';
 import { Loading } from '../../components/icons/icons';
 import { Button } from '../../components/buttons/Button';
 import { NavLink, useLocation } from 'react-router-dom';
-import { ThemeContext } from '../../context/ThemeProvider';
 import { FavoritesContext } from '../../context/FavoriteProvider';
 import { PokemonStats } from '../../components/pokemon-page-components/PokemonStats';
 import { PokemonInfo } from '../../components/pokemon-page-components/PokemonInfo';
 import { PokemonImage } from '../../components/pokemon-page-components/PokemonImage';
 import { PokemonHeader } from '../../components/pokemon-page-components/PokemonHearder';
 import { PokemonEvolutions } from '../../components/pokemon-page-components/PokemonEvolutions';
-import { useApplyTheme } from '../../utils/applyTheme';
 import '../pokemon-page/pokemonpage.css';
 
 export const PokemonPage = () => {
-	const themeContext = useContext(ThemeContext);
 	const { pokemonInfo } = useGetPokemonPageInfo();
 	const { pokemonEvolutions } = useGetEvolutions();
 	const [isLoading, setIsLoading] = useState(true);
 	const { favorites, toggleFavorite } = useContext(FavoritesContext);
 	const location = useLocation();
-	const applyTheme = useApplyTheme();
 
 	useEffect(() => {
 		setIsLoading(!pokemonInfo);
@@ -30,12 +26,6 @@ export const PokemonPage = () => {
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, [location.pathname]);
-
-	useEffect(() => {
-		if (themeContext) {
-			applyTheme(themeContext.currentMode);
-		}
-	}, [themeContext, applyTheme]);
 
 	if (isLoading) {
 		return (
