@@ -22,7 +22,6 @@ export const FavoritesProvider = ({
 			localStorage.getItem('favorites') || '[]'
 		);
 		setFavorites(storedFavorites);
-		console.log(storedFavorites);
 	}, []);
 
 	const toggleFavorite = (id: string) => {
