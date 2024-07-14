@@ -30,9 +30,7 @@ export const SearchBar = ({
 				value={inputValue}
 				onChange={handleInputChange}
 			/>
-			<button type='submit' className='icon-wrapper'>
-				<Searchglass className='icon--absolute' />
-			</button>
+			<Searchglass className='icon--absolute' />
 		</form>
 	);
 };
