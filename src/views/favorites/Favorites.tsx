@@ -1,4 +1,4 @@
-import { useState, useContext, useMemo } from 'react';
+import { useState, useContext, useMemo, useEffect } from 'react';
 import { Button } from '../../components/buttons/Button';
 import { PokemonCard } from '../../components/pokemon-card/PokemonCard';
 import { Link, NavLink } from 'react-router-dom';
@@ -17,6 +17,10 @@ export const Favorites = () => {
 	const { searchTerm } = useSearch();
 	const { favorites } = useContext(FavoritesContext);
 	const { pokemonList, error, isLoading } = useFetchPokemonSinnoh();
+
+	useEffect(() => {
+		setCurrentPage(1);
+	}, [searchTerm]);
 
 	const favoritePokemon = pokemonList.filter((pokemon) =>
 		favorites.includes(String(pokemon.id))

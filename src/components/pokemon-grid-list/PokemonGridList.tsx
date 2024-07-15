@@ -1,4 +1,4 @@
-import { useContext, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 import { useFetchPokemonSinnoh } from '../../hooks/useFetchPokemonSinnoh';
 import { PokemonCard } from '../pokemon-card/PokemonCard';
 import { PokemonViewItem } from '../../models/pokemon-view-item';
@@ -17,6 +17,10 @@ export const PokemonGridList = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [isListView, setIsListView] = useState(false);
 	const { pokemonList, error, isLoading } = useFetchPokemonSinnoh();
+
+	useEffect(() => {
+		setCurrentPage(1);
+	}, [searchTerm]);
 
 	const filteredPokemonList = useMemo(() => {
 		return pokemonList.filter((pokemon) =>
