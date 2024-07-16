@@ -69,6 +69,9 @@ export const PokemonGridList = () => {
 				}>
 				{isLoading && <p>Loading...</p>}
 				{error && <p>{error}</p>}
+				{!isLoading && !error && filteredPokemonList.length === 0 && (
+					<h3>{searchTerm} isn't in the Sinnoh Pokédex.</h3>
+				)}
 				{!isLoading &&
 					!error &&
 					visiblePokemon.map((pokemon: PokemonViewItem) => (

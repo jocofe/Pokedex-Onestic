@@ -71,6 +71,9 @@ export const Favorites = () => {
 				}>
 				{isLoading && <p>Loading...</p>}
 				{error && <p>{error}</p>}
+				{!isLoading && !error && filteredPokemonList.length === 0 && (
+					<h3>{searchTerm} isn't saved in your favorites.</h3>
+				)}
 				{!isLoading &&
 					!error &&
 					visiblePokemon.map((pokemon: PokemonViewItem) => (
