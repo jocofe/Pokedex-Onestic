@@ -28,7 +28,7 @@ export const Favorites = () => {
 
 	const filteredPokemonList = useMemo(() => {
 		return favoritePokemon.filter((pokemon: PokemonViewItem) =>
-			pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+			pokemon.name?.toLowerCase().includes(searchTerm.toLowerCase())
 		);
 	}, [favoritePokemon, searchTerm]);
 
