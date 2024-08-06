@@ -23,7 +23,7 @@ export const PokemonGridList = () => {
 	}, [searchTerm]);
 
 	const filteredPokemonList = useMemo(() => {
-		return pokemonList.filter((pokemon) =>
+		return pokemonList.filter((pokemon: PokemonViewItem) =>
 			pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
 		);
 	}, [pokemonList, searchTerm]);
