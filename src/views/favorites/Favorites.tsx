@@ -22,15 +22,13 @@ export const Favorites = () => {
 		setCurrentPage(1);
 	}, [searchTerm]);
 
-	const favoritePokemon = useMemo(() => {
-		return pokemonList.filter((pokemon) =>
-			favorites.includes(String(pokemon.id))
-		);
-	}, [pokemonList, favorites]);
+	const favoritePokemon = pokemonList.filter((pokemon) =>
+		favorites.includes(String(pokemon.id))
+	);
 
 	const filteredPokemonList = useMemo(() => {
 		return favoritePokemon.filter((pokemon) =>
-			pokemon.name.includes(searchTerm)
+			pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
 		);
 	}, [favoritePokemon, searchTerm]);
 

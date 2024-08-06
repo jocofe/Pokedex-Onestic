@@ -23,7 +23,9 @@ export const PokemonGridList = () => {
 	}, [searchTerm]);
 
 	const filteredPokemonList = useMemo(() => {
-		return pokemonList.filter((pokemon) => pokemon.name.includes(searchTerm));
+		return pokemonList.filter((pokemon) =>
+			pokemon.name.toLowerCase().includes(searchTerm.toLowerCase())
+		);
 	}, [pokemonList, searchTerm]);
 
 	const { paginatedItems: visiblePokemon, totalPages } = usePagination({
